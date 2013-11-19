@@ -24,9 +24,9 @@ contract.py
 Contains an implementation of the CONTRACT(k) algorithm. It is
 split up into three parts:
 
-	- contract(k): establishing a loop to execute k iterations of contraction
-	- contract_node(x,y): contracts the nodes x and y (contracts the edge between x and y)
-	- select_edge(): selecting an edge with the liklihood being proportional to its weight
+- contract(k): establishing a loop to execute k iterations of contraction
+- contract_node(x,y): contracts the nodes x and y (contracts the edge between x and y)
+- select_edge(): selecting an edge with the liklihood being proportional to its weight
 
 The computational as well as the storage complexity of the implemented
 contraction algorithm is O(n^2)
