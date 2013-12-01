@@ -4,7 +4,7 @@ Sheet 5
 Installation
 ------------
 
-Install lp_solve seems to be hassel. My favorite LP/ILP solver,
+Install lp_solve seems to be a hassel. My favorite LP/ILP solver,
 the GLPK is also a standalone package which needs additional
 bindings to use with Python.
 
