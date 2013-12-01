@@ -4,18 +4,19 @@ Sheet 5
 Installation
 ------------
 
-Install lp_solve seems to be a hassel. My favorite LP/ILP solver,
-the GLPK is also a standalone package which needs additional
-bindings to use with Python.
+Install lp_solve seems to be a hassel. The same is true for
+my favorite LP/ILP solver, the GLPK, since my favorite package
+manager, homebrew, is not willing to search for packages...
 
-So we go along with cvxopt since it is a pure python implementation
-available throug pip. And it feels much more pythonic...
+In addition, both solvers need bindings to work with python.
+So we use [cvxopt](http://cvxopt.org), a pure python implementation.
+Not only the useage, but also the installation feels much more pythonic...
 
-So to install just type
+Cvxop is available through pip, so just type the following:
 
 ```
 pip install cvxopt
-# or
+# or if you prefer
 easy_install cvxopt
 ```
 
