@@ -54,19 +54,19 @@ algB.py
 Algorithm B solves a relaxation of MAX-CUT using linear programming.
 We want to solve:
 ```
-	max	sum(z_j, j=1...m)
-	s.t	sum(x_i, i in C+) + sum(1-x_i, i in C-) >= zj
-		z_j, x_i in [0,1]
+max	sum(z_j, j=1...m)
+s.t	sum(x_i, i in C+) + sum(1-x_i, i in C-) >= zj
+	z_j, x_i in [0,1]
 ```
 
 Thus we solve the following equivalent linear program:
 ```
-	min	sum(-z_j, j=1...m)
-	s.t	z_j + sum(-x_i, i in C+) + sum(x_i, i in C-) <= sum(1, i in C-)
-		-z_j <= 0
-		-x_i <= 0
-		z_j <= 1
-		x_i <= 1
+min	sum(-z_j, j=1...m)
+s.t	z_j + sum(-x_i, i in C+) + sum(x_i, i in C-) <= sum(1, i in C-)
+	-z_j <= 0
+	-x_i <= 0
+	z_j <= 1
+	x_i <= 1
 ```
 
 This linear program is represented by a matrix of size (m+n)x(3m+2n).
