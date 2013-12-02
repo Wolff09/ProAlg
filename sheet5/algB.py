@@ -13,8 +13,7 @@ def max_sat(formula):
 	rands = [uniform(0,1) for i in range(len(solution))]
 	# round randomized
 	solution = [1 if r < s else 0 for s,r in zip(solution, rands)]
-	for i,v in enumerate(formula):
-		v.assign(solution[i])
+	[v.assign(solution[i]) for i,v in enumerate(formula)]
 	return sum([c.eval() for c in formula.clauses]), solution
 
 
@@ -59,7 +58,7 @@ def approx_lp(formula):
 	# solve it
 	# opt_debug(A, b, c)
 	sol = solvers.lp(matrix(c),matrix(A),matrix(b))
-	return [round(x,4) for x in sol['x']][m:]
+	return [x for x in sol['x']][m:]
 
 
 def opt_debug(A, b, c):
