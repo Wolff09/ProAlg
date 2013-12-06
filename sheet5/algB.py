@@ -24,7 +24,7 @@ def approx_lp(formula):
 	# objective:
 	# minimize z_1 + z_2 + ... z_m
 	# = maximize -z_1 + -z_2 + ... + -z_m
-	c = [1.0 for j in range(m)] + [0.0 for i in range(n)]
+	c = [-1.0 for j in range(m)] + [0.0 for i in range(n)]
 
 	# matrix for side conditions:
 	# -1 if a literal is a negated variable, 1 otherwise -> see README
