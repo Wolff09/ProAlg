@@ -1,0 +1,76 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+\title{Probability and Algorithms - Sheet 6}
+\author{Sebastian Wolff}
+\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+%\section{}
+%\subsection{}
+
+\section*{Exercise 14i}
+
+We set $a_{ij} = \frac{w_{ij}}{2}$ and $b_{ij} = \frac{w'_{ij}}{2}$, so we get:
+$\underbrace{fads}_{fdas}$
+
+\begin{eqnarray*}
+&max \sum\limits_{0 \leq i < j \leq n} a_{ij}(1-y_iy_j) + b_{ij}(1+y_iy_j) \\
+&= max \sum\limits_{0 \leq i < j \leq n} a_{ij}(1-y_iy_j) + \sum\limits_{0 \leq i < j \leq n} b_{ij}(1+y_iy_j) \\
+&= max \underbrace{\sum\limits_{0 \leq i < j \leq n} w_{ij}\frac{(1-y_iy_j)}{2}}_{ \textrm{max cut with n+1 nodes} } + \underbrace{\sum\limits_{0 \leq i < j \leq n} w'_{ij}\frac{(1+y_iy_j)}{2}}_{\textrm{min cut with n+1 nodes}}
+\end{eqnarray*}
+
+Hence, we need to encode MAX2SAT as a maximum of a MAX-CUT and a MIN-CUT of n+1 nodes (the MAX-CUT and the MIN-CUT can be computed on different graphs).
+Note that the MAX2SAT can be solved with a MAX-CUT with 2n nodes on implication graphs.
+
+\textbf{Idea:} use the node for $y_0$ to encode some kind of supersink/supersource to connect both graphs.
+
+
+\section*{Exercise 14ii}
+
+Define $\tilde{K}$ and $\hat{K}$ as follows:
+
+\begin{eqnarray*}
+\tilde{K}(V) = \sum\limits_{0 \leq i < j \leq n} a_{ij}\frac{arccos(v_i^Tv_j)}{\pi}
+\hat{K}(V) = \sum\limits_{0 \leq i < j \leq n} b_{ij}(1- \frac{arccos(v_i^Tv_j)}{\pi})
+\end{eqnarray*}
+
+Since $E(V) = \tilde{K}(V) + \hat{K}(V)$ and we know from lecture that
+\begin{eqnarray*}
+\tilde{K}(V) = \sum\limits_{0 \leq i < j \leq n} a_{ij}(1-v_i^Tv_j)
+\end{eqnarray*}
+holds, it remains to show:
+\begin{eqnarray*}
+\hat{K}(V) = \sum\limits_{0 \leq i < j \leq n} b_{ij}(1+v_i^Tv_j)
+\end{eqnarray*}
+So here we go:
+\begin{eqnarray*}
+&\sum\limits_{0 \leq i < j \leq n} b_{ij}(1+v_i^Tv_j) \\
+&=\sum\limits_{0 \leq i < j \leq n} b_{ij}Pr(sign(v_i^Tr)=sign(v_j^Tr)) \\
+&=\sum\limits_{0 \leq i < j \leq n} b_{ij}(1-Pr(sign(v_i^Tr)\neq sign(v_j^Tr))) \\
+&=\sum\limits_{0 \leq i < j \leq n} b_{ij}(1-2Pr(v_i^Tr\leq 0 \wedge v_j^Tr > 0)) \\
+&=\sum\limits_{0 \leq i < j \leq n} b_{ij}(1-2\frac{\theta}{2\pi}) \\
+&=\sum\limits_{0 \leq i < j \leq n} b_{ij}(1-\frac{\theta}{\pi}) \\
+&=\sum\limits_{0 \leq i < j \leq n} b_{ij}(1-\frac{arccos(v_i^Tv_j)}{\pi}) \\
+&=\hat{K}(V) \\
+%&=\sum\limits_{0 \leq i < j \leq n} b_{ij} - \sum\limits_{0 \leq i < j \leq n} \frac{arccos(v_i^Tv_j}{\pi} \\
+%&=\sum\limits_{0 \leq i < j \leq n} b_{ij} - \tilde{K}(V)
+\end{eqnarray*}
+When we put things together we get:
+\begin{eqnarray*}
+E(V) = \tilde{K}(V) + \hat{K}(V) = \sum\limits_{0 \leq i < j \leq n} a_{ij}(1-v_i^Tv_j)+b_{ij}(1+v_i^Tv_j)
+\end{eqnarray*}
+Together with $\alpha \leq 1$ we get:
+\begin{eqnarray*}
+E(V) = \alpha(\tilde{K}(V) + \hat{K}(V)) = \alpha(\sum\limits_{0 \leq i < j \leq n} a_{ij}(1-v_i^Tv_j)+b_{ij}(1+v_i^Tv_j))
+\end{eqnarray*}
+
+
+\end{document}
